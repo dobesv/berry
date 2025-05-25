@@ -1,0 +1,51 @@
+{
+  "name": "yarn-plugin-prevent-multiple-instances",
+  "version": "1.0.0",
+  "license": "BSD-2-Clause",
+  "main": "./sources/index.ts",
+  "exports": {
+    ".": "./sources/index.ts",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@yarnpkg/fslib": "workspace:^",
+    "@yarnpkg/plugin-pnp": "workspace:^",
+    "@yarnpkg/plugin-stage": "workspace:^",
+    "clipanion": "^4.0.0-rc.2",
+    "micromatch": "^4.0.2",
+    "p-limit": "^2.2.0",
+    "tslib": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@yarnpkg/cli": "workspace:^",
+    "@yarnpkg/core": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/micromatch": "^4.0.1",
+    "@yarnpkg/builder": "workspace:^",
+    "@yarnpkg/cli": "workspace:^",
+    "@yarnpkg/core": "workspace:^"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dobesv/berry.git",
+    "directory": "packages/plugin-prevent-multiple-instances"
+  },
+  "scripts": {
+    "build": "builder build plugin"
+  },
+  "publishConfig": {
+    "main": "./lib/index.js",
+    "exports": {
+      ".": "./lib/index.js",
+      "./package.json": "./package.json"
+    }
+  },
+  "files": [
+    "/lib/**/*"
+  ],
+  "engines": {
+    "node": ">=18.12.0"
+  },
+  "stableVersion": "1.0.0"
+}
