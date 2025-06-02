@@ -54,7 +54,7 @@ const plugin: Plugin = {
     afterAllInstalled: async (project: Project, {report}: {report: Report, configuration: Configuration}) => {
       const conflicts = findPackagesWithMultipleInstances(project);
       if (conflicts.size) {
-        report.reportError(MessageName.UNNAMED, `[plugin-prevent-multiple-instances] ${conflicts.size} packages listed in preventMultipleInstances have multiple instances. Run "yarn check-for-multiple-instances" for details.`);
+        report.reportWarning(MessageName.UNNAMED, `[plugin-prevent-multiple-instances] ${conflicts.size} packages listed in preventMultipleInstances have multiple instances. Run "yarn check-for-multiple-instances" for details.`);
       }
     },
   },
