@@ -6486,27 +6486,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@yarnpkg/plugin-prevent-multiple-instances@workspace:packages/plugin-prevent-multiple-instances":
-  version: 0.0.0-use.local
-  resolution: "@yarnpkg/plugin-prevent-multiple-instances@workspace:packages/plugin-prevent-multiple-instances"
-  dependencies:
-    "@types/micromatch": "npm:^4.0.1"
-    "@yarnpkg/builder": "workspace:^"
-    "@yarnpkg/cli": "workspace:^"
-    "@yarnpkg/core": "workspace:^"
-    "@yarnpkg/fslib": "workspace:^"
-    "@yarnpkg/plugin-pnp": "workspace:^"
-    "@yarnpkg/plugin-stage": "workspace:^"
-    clipanion: "npm:^4.0.0-rc.2"
-    micromatch: "npm:^4.0.2"
-    p-limit: "npm:^2.2.0"
-    tslib: "npm:^2.4.0"
-  peerDependencies:
-    "@yarnpkg/cli": "workspace:^"
-    "@yarnpkg/core": "workspace:^"
-  languageName: unknown
-  linkType: soft
-
 "@yarnpkg/plugin-stage@workspace:^, @yarnpkg/plugin-stage@workspace:packages/plugin-stage":
   version: 0.0.0-use.local
   resolution: "@yarnpkg/plugin-stage@workspace:packages/plugin-stage"
@@ -22281,6 +22260,27 @@ pem@dexus/pem:
   checksum: 10/2453d52e3403ca86ca9c4279a90da3cbc351b50c7a13cc259bebf2d396530800e53261d9d9c7e2d4b7c049aa16c770f2553bdb04d52c2dbb37271d6cecbdcf2a
   languageName: node
   linkType: hard
+
+"yarn-plugin-prevent-multiple-instances@workspace:packages/plugin-prevent-multiple-instances":
+  version: 0.0.0-use.local
+  resolution: "yarn-plugin-prevent-multiple-instances@workspace:packages/plugin-prevent-multiple-instances"
+  dependencies:
+    "@types/micromatch": "npm:^4.0.1"
+    "@yarnpkg/builder": "workspace:^"
+    "@yarnpkg/cli": "workspace:^"
+    "@yarnpkg/core": "workspace:^"
+    "@yarnpkg/fslib": "workspace:^"
+    "@yarnpkg/plugin-pnp": "workspace:^"
+    "@yarnpkg/plugin-stage": "workspace:^"
+    clipanion: "npm:^4.0.0-rc.2"
+    micromatch: "npm:^4.0.2"
+    p-limit: "npm:^2.2.0"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@yarnpkg/cli": "workspace:^"
+    "@yarnpkg/core": "workspace:^"
+  languageName: unknown
+  linkType: soft
 
 "yauzl@npm:^2.3.1":
   version: 2.10.0
