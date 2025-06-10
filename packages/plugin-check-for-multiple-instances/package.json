@@ -1,5 +1,5 @@
 {
-  "name": "yarn-plugin-prevent-multiple-instances",
+  "name": "yarn-plugin-check-for-multiple-instances",
   "version": "1.1.0",
   "license": "BSD-2-Clause",
   "main": "./sources/index.ts",
@@ -29,7 +29,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dobesv/berry.git",
-    "directory": "packages/plugin-prevent-multiple-instances"
+    "directory": "packages/plugin-check-for-multiple-instances"
   },
   "scripts": {
     "build": "builder build plugin"

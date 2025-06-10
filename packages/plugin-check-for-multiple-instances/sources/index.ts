@@ -6,39 +6,44 @@ import {findPackagesWithMultipleInstances}                                 from 
 
 declare module '@yarnpkg/core' {
   interface ConfigurationValueMap {
-    preventMultipleInstances: Array<string>;
+    checkForMultipleInstances: Array<string>;
   }
 }
 
 const plugin: Plugin = {
   configuration: {
-    preventMultipleInstances: {
-      description: `Indicate packages which should not be allowed to be installed multiple times.
+    checkForMultipleInstances: {
+      description: `Check for packages with multiple virtual instances.
 
-      This is important for stateful packages like react where the state should be shared globally in the application.
+      Multiple package instances can cause hard to find bugs with stateful packages like react where the state
+      should be shared globally in the application.
 
-      Provide a list of glob patterns to match; packages that match the pattern will not be allowed to be installed multiple
-      times.  This uses micromatch to match the pattern against the package name and version, so refer to micromatch's
+      You can specify a list of packages that should be checked in .yarnrc.yml, as "checkForMultipleInstances".  If
+      this is provided and there's a detected conflict during yarn install, it will print a warning.
+
+      This also adds a command check-for-multiple-instances to list the packages with multiple instances; if the
+      checkForMultipleInstances list is provided, it only reports on the packages matching those patterns, otherwise
+      it will check all packages.
+
+      checkForMultipleInstances is a list of glob patterns to match; packages that match the pattern will be checked
+      for multiple instances.  It uses micromatch to match the pattern against the package name; refer to micromatch's
       documentation for detailed syntax.
 
       Negations can be used to "whitelist" specific packages that match an earlier wildcard but should still be allowed
       to have multiple instances.
 
-      Use a prefix of "virtual:" with a wildcard to only match packages that have peer dependencies, e.g. "virtual:*"
-      to block multiple instances of packages with peer dependencies by default.
-
       For example, you could configure specific packages that you do not want to allow multiple instances of, e.g.
 
-      preventMultipleInstances:
+      checkForMultipleInstances:
       - 'react-*'
       - 'styled-components'
 
       Or you could block multiple instances of all virtual packages by default, and add exclusions for packages
       you want to allow multiple instances of, e.g.
 
-      preventMultipleInstances:
+      checkForMultipleInstances:
       - '@myscope/*'
-      - 'virtual:*'
+      - '*'
       - '!debug'
       - '!webpack*'
       - '!*-loader'
@@ -55,7 +60,7 @@ const plugin: Plugin = {
     afterAllInstalled: async (project: Project, {report}: {report: Report, configuration: Configuration}) => {
       const conflicts = findPackagesWithMultipleInstances(project);
       if (conflicts.size) {
-        report.reportWarning(MessageName.UNNAMED, `[plugin-prevent-multiple-instances] ${conflicts.size} packages listed in preventMultipleInstances have multiple instances. Run "yarn check-for-multiple-instances" for details.`);
+        report.reportWarning(MessageName.UNNAMED, `[plugin-check-for-multiple-instances] ${conflicts.size} packages listed in checkForMultipleInstances have multiple instances. Run "yarn check-for-multiple-instances" for details.`);
       }
     },
   },

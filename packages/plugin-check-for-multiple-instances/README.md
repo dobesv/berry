@@ -3,7 +3,7 @@ This plugin helps identify packages that have multiple virtual instances due to 
 
 This is important for stateful packages like react where the state should be shared globally in the application.
 
-To use it, update `.yarnrc.yml` to provide a list of glob patterns to match as `preventMultipleInstances`; packages
+To use it, update `.yarnrc.yml` to provide a list of glob patterns to match as `checkForMultipleInstances`; packages
 that match the pattern will not be allowed to be installed multiple times.  This uses micromatch to match the
 pattern against the package name and version, so refer to micromatch's documentation for detailed syntax.
 
@@ -14,7 +14,7 @@ For example, you could configure specific packages that you do not want to allow
 
 ```yaml
 # In .yarnrc.yml
-preventMultipleInstances:
+checkForMultipleInstances:
 - 'react-*'
 - 'styled-components'
 ```
@@ -24,7 +24,7 @@ by default, and add exclusions for packages you want to allow multiple instances
 
 ```yaml
 # In .yarnrc.yml
-preventMultipleInstances:
+checkForMultipleInstances:
 - '*'
 - '!debug'
 - '!typescript'
@@ -41,5 +41,5 @@ in a lint/CI check and report failure.
 Installation:
 
 ```sh
-yarn plugin import https://github.com/dobesv/berry/releases/download/plugin-prevent-multiple-instances-v1.2/plugin-prevent-multiple-instances.js
+yarn plugin import https://github.com/dobesv/berry/releases/download/plugin-check-for-multiple-instances-v1.2/plugin-check-for-multiple-instances.js
 ```

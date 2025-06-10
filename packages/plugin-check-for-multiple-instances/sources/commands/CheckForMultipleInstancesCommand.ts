@@ -22,10 +22,13 @@ export class CheckForMultipleInstancesCommand extends BaseCommand {
   static usage = Command.Usage({
     description: `Detects multiple instances of packages due to peer dependency conflicts.`,
     details: `
-      This command lists packages matching the preventMultipleInstances config list in .yarnrc.yml
-      that have multiple instances within the project.
+      This command lists packages that have multiple instances within the project, along with
+      their dependents and the peer dependency resolutions for each instance.
 
       If there are multiple instances found, the command will exit with a non-zero exit code.
+
+      If checkForMultipleInstances is set in .yarnrc.yml, this only checks for multiple instances
+      of packages matching the given patterns.
     `,
     examples: [[
       `Show detected but forbidden multiple package instances`,
@@ -38,7 +41,8 @@ export class CheckForMultipleInstancesCommand extends BaseCommand {
     const {project} = await Project.find(configuration, this.context.cwd);
 
     await project.restoreInstallState();
-    const instancesByIdent = findPackagesWithMultipleInstances(project);
+    const patterns = project.configuration.get(`checkForMultipleInstances`);
+    const instancesByIdent = findPackagesWithMultipleInstances(project, patterns?.length ? patterns : [`*`]);
 
     if (instancesByIdent.size) {
       const dependentMap = new Map<LocatorHash, Array<Locator>>();
@@ -114,8 +118,8 @@ export class CheckForMultipleInstancesCommand extends BaseCommand {
       });
 
       throw new UsageError(`Multiple instances of packages detected due to peer dependency mismatches. This can lead to runtime errors.`);
-    } else if (!project.configuration.get(`preventMultipleInstances`)) {
-      throw new UsageError(`No patterns defined in preventMultipleInstances in your yarn configuration, no checking will be done.`);
+    } else if (!project.configuration.get(`checkForMultipleInstances`)) {
+      throw new UsageError(`No patterns defined in checkForMultipleInstances in your yarn configuration, no checking will be done.`);
     }
   }
 }

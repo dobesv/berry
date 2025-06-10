@@ -43,6 +43,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:packages/make-fetch-smaller"\
     },\
     {\
+      "name": "yarn-plugin-check-for-multiple-instances",\
+      "reference": "workspace:packages/plugin-check-for-multiple-instances"\
+    },\
+    {\
       "name": "@yarnpkg/plugin-compat",\
       "reference": "workspace:packages/plugin-compat"\
     },\
@@ -121,10 +125,6 @@ const RAW_RUNTIME_STATE =
     {\
       "name": "@yarnpkg/plugin-pnpm",\
       "reference": "workspace:packages/plugin-pnpm"\
-    },\
-    {\
-      "name": "yarn-plugin-prevent-multiple-instances",\
-      "reference": "workspace:packages/plugin-prevent-multiple-instances"\
     },\
     {\
       "name": "@yarnpkg/plugin-stage",\
@@ -259,7 +259,7 @@ const RAW_RUNTIME_STATE =
     ["pkg-tests-fixtures", ["workspace:packages/acceptance-tests/pkg-tests-fixtures"]],\
     ["pkg-tests-specs", ["workspace:packages/acceptance-tests/pkg-tests-specs"]],\
     ["vscode-zipfs", ["workspace:packages/vscode-zipfs"]],\
-    ["yarn-plugin-prevent-multiple-instances", ["workspace:packages/plugin-prevent-multiple-instances"]]\
+    ["yarn-plugin-check-for-multiple-instances", ["workspace:packages/plugin-check-for-multiple-instances"]]\
   ],\
   "fallbackPool": [\
   ],\
@@ -38711,9 +38711,9 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["yarn-plugin-prevent-multiple-instances", [\
-      ["workspace:packages/plugin-prevent-multiple-instances", {\
-        "packageLocation": "./packages/plugin-prevent-multiple-instances/",\
+    ["yarn-plugin-check-for-multiple-instances", [\
+      ["workspace:packages/plugin-check-for-multiple-instances", {\
+        "packageLocation": "./packages/plugin-check-for-multiple-instances/",\
         "packageDependencies": [\
           ["@types/micromatch", "npm:4.0.1"],\
           ["@yarnpkg/builder", "workspace:packages/yarnpkg-builder"],\
@@ -38726,7 +38726,7 @@ const RAW_RUNTIME_STATE =
           ["micromatch", "npm:4.0.5"],\
           ["p-limit", "npm:2.2.0"],\
           ["tslib", "npm:2.6.2"],\
-          ["yarn-plugin-prevent-multiple-instances", "workspace:packages/plugin-prevent-multiple-instances"]\
+          ["yarn-plugin-check-for-multiple-instances", "workspace:packages/plugin-check-for-multiple-instances"]\
         ],\
         "linkType": "SOFT"\
       }]\

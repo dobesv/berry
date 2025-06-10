@@ -4,10 +4,9 @@ import micromatch                                            from 'micromatch';
 /**
  * Find packages that match the configured patterns and have been resolved to multiple instances.
  */
-export function findPackagesWithMultipleInstances(project: Project) {
+export function findPackagesWithMultipleInstances(project: Project, patterns = project.configuration.get(`checkForMultipleInstances`)) {
   const instancesByIdent = new Map<IdentHash, Array<Package>>();
 
-  const patterns = project.configuration.get(`preventMultipleInstances`);
   if (patterns?.length) {
     // Adjust the patterns so that an exclusion of a non-virtual package also applies to a virtual package
     const packages = miscUtils.sortMap([...project.storedPackages.values()], pkg => {

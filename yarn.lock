@@ -22261,9 +22261,9 @@ pem@dexus/pem:
   languageName: node
   linkType: hard
 
-"yarn-plugin-prevent-multiple-instances@workspace:packages/plugin-prevent-multiple-instances":
+"yarn-plugin-check-for-multiple-instances@workspace:packages/plugin-check-for-multiple-instances":
   version: 0.0.0-use.local
-  resolution: "yarn-plugin-prevent-multiple-instances@workspace:packages/plugin-prevent-multiple-instances"
+  resolution: "yarn-plugin-check-for-multiple-instances@workspace:packages/plugin-check-for-multiple-instances"
   dependencies:
     "@types/micromatch": "npm:^4.0.1"
     "@yarnpkg/builder": "workspace:^"
