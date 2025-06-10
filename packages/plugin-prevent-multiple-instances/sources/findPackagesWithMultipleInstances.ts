@@ -10,24 +10,19 @@ export function findPackagesWithMultipleInstances(project: Project) {
   const patterns = project.configuration.get(`preventMultipleInstances`);
   if (patterns?.length) {
     // Adjust the patterns so that an exclusion of a non-virtual package also applies to a virtual package
-    const processedPatterns = patterns.map(pattern =>
-      pattern.startsWith(`!`) &&
-      !pattern.startsWith(`!?(virtual:)`) ? `!?(virtual:)${pattern.slice(1)}` : pattern);
     const packages = miscUtils.sortMap([...project.storedPackages.values()], pkg => {
       return structUtils.stringifyLocator(pkg);
     });
     for (const pkg of packages) {
-      const ident = structUtils.stringifyIdent(pkg);
-      // Check if the package ident matches the configured patterns
-      // For a virtual package we also check against the package name with a prefix "virtual:"
-      const idents = [ident];
-      if (structUtils.isVirtualLocator(pkg))
-        idents.push(`virtual:${ident}`);
-
-      const matched = micromatch(idents, processedPatterns);
-      if (matched.length) {
-        const baseLocator = structUtils.ensureDevirtualizedLocator(pkg);
-        miscUtils.getArrayWithDefault(instancesByIdent, baseLocator.identHash).push(pkg);
+      // Only virtual packages can have multiple instances
+      if (structUtils.isVirtualLocator(pkg)) {
+        const ident = structUtils.stringifyIdent(pkg);
+        // Check if the package ident matches the configured patterns
+        const matched = micromatch([ident], patterns);
+        if (matched.length) {
+          const baseLocator = structUtils.ensureDevirtualizedLocator(pkg);
+          miscUtils.getArrayWithDefault(instancesByIdent, baseLocator.identHash).push(pkg);
+        }
       }
     }
 
