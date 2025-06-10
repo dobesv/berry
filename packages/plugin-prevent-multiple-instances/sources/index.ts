@@ -37,6 +37,7 @@ const plugin: Plugin = {
       you want to allow multiple instances of, e.g.
 
       preventMultipleInstances:
+      - '@myscope/*'
       - 'virtual:*'
       - '!debug'
       - '!webpack*'
