@@ -37,3 +37,9 @@ instances, their dependent packages, and how peer dependencies were resolved.
 
 Also, `yarn check-for-multiple-instances` will exit status 1 if multiple instances were found, so you can use this
 in a lint/CI check and report failure.
+
+Installation:
+
+```sh
+yarn plugin import https://github.com/dobesv/berry/releases/download/plugin-prevent-multiple-instances-v1.2/plugin-prevent-multiple-instances.js
+```
