@@ -29,6 +29,10 @@ export class CheckForMultipleInstancesCommand extends BaseCommand {
 
       If checkForMultipleInstances is set in .yarnrc.yml, this only checks for multiple instances
       of packages matching the given patterns.
+
+      **Important:** Use \`**\` (double asterisk) instead of \`*\` to match all packages including
+      scoped packages (e.g., \`@scope/package\`). A single \`*\` does not match the \`/\` character
+      in glob patterns.
     `,
     examples: [[
       `Show detected but forbidden multiple package instances`,
