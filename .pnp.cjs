@@ -87,6 +87,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:packages/plugin-link"\
     },\
     {\
+      "name": "yarn-plugin-materialize-virtual-workspaces",\
+      "reference": "workspace:packages/plugin-materialize-virtual-workspaces"\
+    },\
+    {\
       "name": "@yarnpkg/plugin-nm",\
       "reference": "workspace:packages/plugin-nm"\
     },\
@@ -243,7 +247,8 @@ const RAW_RUNTIME_STATE =
     ["pkg-tests-core", ["workspace:packages/acceptance-tests/pkg-tests-core"]],\
     ["pkg-tests-fixtures", ["workspace:packages/acceptance-tests/pkg-tests-fixtures"]],\
     ["pkg-tests-specs", ["workspace:packages/acceptance-tests/pkg-tests-specs"]],\
-    ["vscode-zipfs", ["workspace:packages/vscode-zipfs"]]\
+    ["vscode-zipfs", ["workspace:packages/vscode-zipfs"]],\
+    ["yarn-plugin-materialize-virtual-workspaces", ["workspace:packages/plugin-materialize-virtual-workspaces"]]\
   ],\
   "fallbackPool": [\
   ],\
@@ -37509,6 +37514,20 @@ const RAW_RUNTIME_STATE =
           ["yargs-parser", "npm:21.0.1"]\
         ],\
         "linkType": "HARD"\
+      }]\
+    ]],\
+    ["yarn-plugin-materialize-virtual-workspaces", [\
+      ["workspace:packages/plugin-materialize-virtual-workspaces", {\
+        "packageLocation": "./packages/plugin-materialize-virtual-workspaces/",\
+        "packageDependencies": [\
+          ["@yarnpkg/builder", "workspace:packages/yarnpkg-builder"],\
+          ["@yarnpkg/cli", "virtual:8bb72793b532d34e63bbc26264dcbcfc4dc4faa0a42627635e997081722bf229d67b7a677d86a568dad949d756630e45b9d4da97ee14b1b4c506494f8a58ea91#workspace:packages/yarnpkg-cli"],\
+          ["@yarnpkg/core", "workspace:packages/yarnpkg-core"],\
+          ["@yarnpkg/fslib", "workspace:packages/yarnpkg-fslib"],\
+          ["tslib", "npm:2.6.2"],\
+          ["yarn-plugin-materialize-virtual-workspaces", "workspace:packages/plugin-materialize-virtual-workspaces"]\
+        ],\
+        "linkType": "SOFT"\
       }]\
     ]],\
     ["yauzl", [\

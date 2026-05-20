@@ -1,0 +1,45 @@
+{
+  "name": "yarn-plugin-materialize-virtual-workspaces",
+  "version": "1.0.0",
+  "license": "BSD-2-Clause",
+  "main": "./sources/index.ts",
+  "exports": {
+    ".": "./sources/index.ts",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@yarnpkg/fslib": "workspace:^",
+    "tslib": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@yarnpkg/cli": "workspace:^",
+    "@yarnpkg/core": "workspace:^"
+  },
+  "devDependencies": {
+    "@yarnpkg/builder": "workspace:^",
+    "@yarnpkg/cli": "workspace:^",
+    "@yarnpkg/core": "workspace:^"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dobesv/berry.git",
+    "directory": "packages/plugin-materialize-virtual-workspaces"
+  },
+  "scripts": {
+    "build": "builder build plugin"
+  },
+  "publishConfig": {
+    "main": "./lib/index.js",
+    "exports": {
+      ".": "./lib/index.js",
+      "./package.json": "./package.json"
+    }
+  },
+  "files": [
+    "/lib/**/*"
+  ],
+  "engines": {
+    "node": ">=18.12.0"
+  },
+  "stableVersion": "1.0.0"
+}

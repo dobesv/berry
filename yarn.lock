@@ -21885,6 +21885,21 @@ pem@dexus/pem:
   languageName: node
   linkType: hard
 
+"yarn-plugin-materialize-virtual-workspaces@workspace:packages/plugin-materialize-virtual-workspaces":
+  version: 0.0.0-use.local
+  resolution: "yarn-plugin-materialize-virtual-workspaces@workspace:packages/plugin-materialize-virtual-workspaces"
+  dependencies:
+    "@yarnpkg/builder": "workspace:^"
+    "@yarnpkg/cli": "workspace:^"
+    "@yarnpkg/core": "workspace:^"
+    "@yarnpkg/fslib": "workspace:^"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@yarnpkg/cli": "workspace:^"
+    "@yarnpkg/core": "workspace:^"
+  languageName: unknown
+  linkType: soft
+
 "yauzl@npm:^2.3.1":
   version: 2.10.0
   resolution: "yauzl@npm:2.10.0"
