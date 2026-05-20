@@ -10,17 +10,37 @@ import * as nodePath                  from 'path';
 const rawSymlinkSync: (target: string, p: string, type?: string) => void = (nodeFs as any).symlinkSync;
 const rawMkdirSync: (p: string, opts?: any) => void = (nodeFs as any).mkdirSync;
 const rawRmSync: (p: string, opts?: any) => void = (nodeFs as any).rmSync;
+const rawReaddirSync: (p: string) => Array<string> = (nodeFs as any).readdirSync;
+
+// Matches slugs produced by structUtils.slugifyLocator() for virtual locators:
+// "<name>-virtual-<10 hex chars>" (with an optional "@scope-" prefix folded
+// into the name part).
+const VIRTUAL_SLUG_REGEX = /-virtual-[a-f0-9]+$/;
+
+function cleanStaleVirtualSlugs(virtualFolder: string) {
+  let entries: Array<string>;
+  try {
+    entries = rawReaddirSync(virtualFolder);
+  } catch {
+    return;
+  }
+
+  for (const entry of entries) {
+    if (!VIRTUAL_SLUG_REGEX.test(entry))
+      continue;
+    rawRmSync(nodePath.join(virtualFolder, entry), {recursive: true, force: true});
+  }
+}
 
 async function materializeVirtualWorkspaces(project: Project) {
   const virtualFolder = project.configuration.get(`virtualFolder`);
   const nativeVirtualFolder = npath.fromPortablePath(virtualFolder);
 
-  // Drop the directory entirely so stale virtual slugs from previous installs
-  // don't accumulate. PnP doesn't otherwise need anything on disk under
-  // __virtual__, so removing it is safe.
-  try {
-    rawRmSync(nativeVirtualFolder, {recursive: true, force: true});
-  } catch {}
+  // Remove existing slug subdirectories so stale entries from previous
+  // installs don't accumulate. Only entries matching the virtual-slug pattern
+  // are touched — that way a misconfigured `virtualFolder` (or a future
+  // schema change) can't lead us to delete unrelated content.
+  cleanStaleVirtualSlugs(nativeVirtualFolder);
 
   let created = 0;
 
