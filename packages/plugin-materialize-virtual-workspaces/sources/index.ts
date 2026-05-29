@@ -62,8 +62,16 @@ async function materializeVirtualWorkspaces(project: Project) {
     const nativeRelTarget = nodePath.relative(nativeLinkParent, nativeWorkspaceCwd);
 
     rawMkdirSync(nativeLinkParent, {recursive: true});
-    rawSymlinkSync(nativeRelTarget, nativeVirtualPath, `dir`);
-    created += 1;
+    try {
+      rawSymlinkSync(nativeRelTarget, nativeVirtualPath, `dir`);
+      created += 1;
+    } catch (err) {
+      // If the symlink is already there, leave it as-is and move on — there's
+      // nothing to fix and no reason to warn. Anything else is unexpected and
+      // should propagate to the hook's error handler.
+      if ((err as NodeJS.ErrnoException).code !== `EEXIST`)
+        throw err;
+    }
   }
 
   return created;
@@ -72,7 +80,13 @@ async function materializeVirtualWorkspaces(project: Project) {
 const plugin: Plugin = {
   hooks: {
     afterAllInstalled: async (project: Project) => {
-      await materializeVirtualWorkspaces(project);
+      try {
+        await materializeVirtualWorkspaces(project);
+      } catch (err) {
+        // Materializing virtual workspaces is a best-effort convenience for
+        // file watchers; never let a filesystem error crash `yarn install`.
+        console.warn(`[plugin-materialize-virtual-workspaces] Warning: failed to materialize virtual workspaces: ${(err as Error).message}`);
+      }
     },
   },
 };
